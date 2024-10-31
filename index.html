@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Highlights Categorizer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gradient-to-br from-gray-50 to-gray-100">
+    <div class="container mx-auto p-6 min-h-screen">
+      <h1 class="text-4xl font-bold mb-8 text-center text-gray-800">Book Highlights Categorizer</h1>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Input Section -->
+        <div class="space-y-6">
+          <div class="bg-white rounded-xl shadow-sm p-6 space-y-4">
+            <div>
+              <label for="highlights" class="block text-sm font-medium text-gray-700 mb-2">Book Highlights</label>
+              <textarea
+                id="highlights"
+                class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 h-48 transition duration-150 ease-in-out"
+                placeholder="Paste your highlights here, one per line..."
+              ></textarea>
+            </div>
+            
+            <div>
+              <label for="categories" class="block text-sm font-medium text-gray-700 mb-2">Categories</label>
+              <textarea
+                id="categories"
+                class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 h-32 transition duration-150 ease-in-out"
+                placeholder="Enter categories, one per line..."
+              ></textarea>
+            </div>
+
+            <div>
+              <label for="prompt" class="block text-sm font-medium text-gray-700 mb-2">Custom Prompt Template</label>
+              <textarea
+                id="prompt"
+                class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 h-32 transition duration-150 ease-in-out font-mono text-sm"
+                placeholder="Enter your custom prompt template. Use [highlight] and [categories] as placeholders..."
+              >You are a book highlights categorizer. Analyze the following highlight: [highlight] and categorize it into one of the following categories: [categories]</textarea>
+            </div>
+
+            <div>
+              <label for="apiKey" class="block text-sm font-medium text-gray-700 mb-2">OpenAI API Key</label>
+              <input
+                type="password"
+                id="apiKey"
+                class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 transition duration-150 ease-in-out"
+                placeholder="sk-..."
+              />
+            </div>
+
+            <button
+              id="processBtn"
+              class="w-full bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transition duration-150 ease-in-out transform hover:scale-[1.02] disabled:hover:scale-100 font-medium"
+              disabled
+            >
+              Process Highlights
+            </button>
+          </div>
+        </div>
+
+        <!-- Output Section -->
+        <div class="space-y-6">
+          <div class="bg-white rounded-xl shadow-sm p-6">
+            <h2 class="text-lg font-semibold mb-4 text-gray-800">Progress</h2>
+            <div class="space-y-3">
+              <div id="progressStats" class="text-sm text-gray-600">0 of 0 highlights processed</div>
+              <div class="w-full bg-gray-100 rounded-full h-3">
+                <div id="progressBar" class="bg-indigo-600 h-3 rounded-full transition-all duration-300 ease-in-out" style="width: 0%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-sm p-6">
+            <div class="flex justify-between items-center mb-4">
+              <h2 class="text-lg font-semibold text-gray-800">Categorized Highlights</h2>
+              <div class="space-x-2">
+                <button
+                  id="downloadBtn"
+                  class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-150 ease-in-out"
+                >
+                  Download TXT
+                </button>
+                <button
+                  id="copyBtn"
+                  class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-150 ease-in-out"
+                >
+                  Copy to Clipboard
+                </button>
+              </div>
+            </div>
+            <div id="output" class="whitespace-pre-wrap font-mono text-sm bg-gray-50 rounded-lg p-4 min-h-[200px]"></div>
+          </div>
+
+          <!-- API Log Section -->
+          <div class="bg-white rounded-xl shadow-sm p-6">
+            <div class="flex justify-between items-center mb-4">
+              <h2 class="text-lg font-semibold text-gray-800">Processing Log</h2>
+              <button
+                id="clearLogBtn"
+                class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-150 ease-in-out"
+              >
+                Clear Log
+              </button>
+            </div>
+            <div id="apiLog" class="text-sm space-y-2 max-h-[300px] overflow-y-auto"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>
